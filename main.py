@@ -20,15 +20,15 @@ train_file_path = "train-data.tsv"
 test_file_path = "valid-data.tsv"
 
 dataset_train = pd.read_csv(train_file_path, sep = "\t", header = None, names = ["y", "x"])
-# print(dataset_train.head())
+print(dataset_train.head())
 
 dataset_test = pd.read_csv(test_file_path, sep = "\t", header = None, names = ["y", "x"])
-# print(dataset_test.head())
+print(dataset_test.head())
 
 y_train =  dataset_train["y"].astype("category").cat.codes
 y_test = dataset_test["y"].astype("category").cat.codes
-# print(y_train[:5])
-# print(y_test[:5])
+print(y_train[:5])
+print(y_test[:5])
 
 
 bar = dataset_train['y'].value_counts()
@@ -43,8 +43,10 @@ print(len(stopwords_eng))
 
 lemmatizer = WordNetLemmatizer()
 
+
 def clean_txt(txt):
     txt = re.sub(r'([^\s\w])+', ' ', txt)
+    print(txt)
     txt = " ".join([lemmatizer.lemmatize(word) for word in txt.split()
                     if not word in stopwords_eng])
     txt = txt.lower()
